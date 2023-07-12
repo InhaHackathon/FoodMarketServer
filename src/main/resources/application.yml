@@ -1,0 +1,64 @@
+# Application properties for Capstone GD project
+
+# Configure the logging level to info for Spring Framework
+logging:
+  level:
+    org.springframework: info
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+# Set the time zone for the database connection to UTC
+spring:
+  jpa:
+    properties:
+      hibernate.jdbc.time_zone: UTC
+
+    # Use Hibernate to automatically create tables based on entity classes
+    hibernate:
+      ddl-auto: create
+      show-sql: true
+
+  # Configure the MariaDB database connection
+  datasource:
+    url: jdbc:mariadb://localhost:3306/foodmarket
+    username: root
+    password: 9362802
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  # File Upload Preferences
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 50MB
+
+resource:
+  file:
+    url: /resources/files
+    path: ${user.dir}/cloud
+    allow-extension: bmp,jpg,jpeg,png,gif
+
+# JWT
+jwt:
+  secret-key: ENC(S7GPwu6uPVXhktuGgDomU2MxMUqHfw8w4jL5cQAtGYAD8CvjxOouxMkyPVAYWkjCxtc1NGRQQxKv8LSjYA2rtQ==)
+
+# Configure Swagger UI and generate OpenAPI documentation
+springdoc:
+  version: v1.0.0
+  packages-to-scan: com.inhahackathon.foodmarket
+  swagger-ui:
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    groups:
+      enabled: true
+  cache:
+    disabled: true
+  default-consumes-media-type: application/json;charset=UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
