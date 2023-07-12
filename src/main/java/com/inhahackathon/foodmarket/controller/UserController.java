@@ -4,6 +4,8 @@ import com.inhahackathon.foodmarket.auth.jwt.AuthToken;
 import com.inhahackathon.foodmarket.service.UserService;
 import com.inhahackathon.foodmarket.type.dto.ResponseModel;
 import com.inhahackathon.foodmarket.type.entity.User;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PathVariable;
