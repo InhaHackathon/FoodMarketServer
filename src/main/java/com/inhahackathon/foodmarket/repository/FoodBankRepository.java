@@ -10,4 +10,3 @@ import java.util.List;
 public interface FoodBankRepository extends JpaRepository<FoodBank, Long> {
     List<FoodBank> findAll();
 }
-X
