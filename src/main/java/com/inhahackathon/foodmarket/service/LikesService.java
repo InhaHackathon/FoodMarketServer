@@ -37,12 +37,6 @@ public class LikesService {
     }
 
     @Transactional
-    public void deleteLikesByUserId(User userId) {
-        List<Likes> likesList = likesRepository.findAllByUserId(userId);
-        likesRepository.deleteInBatch(likesList);
-    }
-
-    @Transactional
     public List<BoardDto> getLikeBoard(Long userId) {
         User user = userRepository.getUserByUserId(userId).orElseThrow(() -> new NotFoundException("해당 유저가 없습니다."));
         List<Likes> likesList = likesRepository.findAllByUserId(user);

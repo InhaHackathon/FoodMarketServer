@@ -1,5 +1,6 @@
 package com.inhahackathon.foodmarket.repository;
 
+import com.inhahackathon.foodmarket.type.entity.Board;
 import com.inhahackathon.foodmarket.type.entity.Likes;
 import com.inhahackathon.foodmarket.type.entity.LikesPK;
 import com.inhahackathon.foodmarket.type.entity.User;
@@ -14,14 +15,18 @@ public interface LikesRepository extends JpaRepository<Likes, LikesPK> {
 
     List<Likes> findAllByUserId(User userId);
 
-    @Modifying
-    @Query("DELETE FROM Likes l WHERE l.boardId.boardId = :boardId")
-    void deleteByBoardId(@Param("boardId") Long boardId);
+    List<Likes> findAllByBoardId(Board b);
 
     @Modifying
     @Query("INSERT INTO Likes(userId, boardId) SELECT u, b FROM User u JOIN Board b ON u.userId = :userId AND b.boardId = :boardId")
     void saveLikes(@Param("userId") Long userId, @Param("boardId") Long boardId);
 
+    @Modifying
+    @Query("DELETE FROM Likes l WHERE l.boardId.boardId = :boardId")
+    void deleteByBoardId(@Param("boardId") Long boardId);
 
+    @Modifying
+    @Query("DELETE FROM Likes l WHERE l = :like")
+    void deleteLike(@Param("like") Likes like);
 
 }

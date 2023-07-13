@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
 @IdClass(LikesPK.class)
 @Entity
 public class Likes {
@@ -19,5 +20,10 @@ public class Likes {
     @ManyToOne
     @JoinColumn(name = "board_id")
     private Board boardId;
+
+    private Likes(User userId, Board boardId) {
+        this.userId = userId;
+        this.boardId = boardId;
+    }
 
 }
