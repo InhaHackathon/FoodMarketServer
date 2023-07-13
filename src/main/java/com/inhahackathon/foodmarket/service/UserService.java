@@ -79,8 +79,7 @@ public class UserService {
     @Transactional
     public void deleteUser(Long userId) {
         User user = userRepository.getUserByUserId(userId).orElseThrow(() -> new NotFoundException("해당 유저가 없습니다."));
-        likesService.deleteLikesByUserId(user);
-        boardService.deleteBoardByWriterId(user);
+        boardService.deleteAllBoard(user);
         userRepository.deleteById(userId);
     }
 
