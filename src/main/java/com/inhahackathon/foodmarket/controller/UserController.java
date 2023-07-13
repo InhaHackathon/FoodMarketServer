@@ -1,7 +1,6 @@
 package com.inhahackathon.foodmarket.controller;
 
 import com.inhahackathon.foodmarket.auth.jwt.AuthToken;
-import com.inhahackathon.foodmarket.auth.util.AuthUtil;
 import com.inhahackathon.foodmarket.exception.NotAllowValueException;
 import com.inhahackathon.foodmarket.exception.PermissionDeniedException;
 import com.inhahackathon.foodmarket.service.UserService;
@@ -54,7 +53,7 @@ public class UserController {
         return responseModel;
     }
 
-    @Operation(summary = "유저 삭제(일반 유저)", description = "회원 탈퇴" + "PathVariable : userId(삭제할 유저의 userId)")
+    @Operation(summary = "유저 삭제", description = "회원 탈퇴")
 //    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @DeleteMapping("/delete/{userId}")
     public ResponseModel userDeleteAsUser(
