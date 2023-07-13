@@ -26,10 +26,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login") // 사용자 정의 로그인 페이지 경로 설정
+                .anyRequest()
                 .permitAll()
                 .and()
                 .csrf().disable()
