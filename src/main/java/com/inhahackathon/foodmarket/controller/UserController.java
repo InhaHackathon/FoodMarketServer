@@ -29,9 +29,7 @@ public class UserController {
     public ResponseModel saveUserFromFirebase(@PathVariable String uid) {
         User user = userService.saveUserFromFirebase(uid);
         AuthToken authToken = userService.getUserToken(user);
-        log.debug("AuthToken Data : {}", authToken.getToken());
         ResponseModel responseModel = ResponseModel.builder().build();
-        responseModel.addData("user", user);
         responseModel.addData("jwt", authToken.getToken());
         return responseModel;
     }
