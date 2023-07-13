@@ -8,7 +8,6 @@ import java.time.LocalDate;
 
 @Entity
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "board", indexes =
