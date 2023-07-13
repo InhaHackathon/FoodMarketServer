@@ -53,6 +53,18 @@ public class UserController {
         return responseModel;
     }
 
+    @Operation(summary = "유저 정보", description = "프로필 정보 조회")
+//    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @DeleteMapping("/{userId}")
+    public ResponseModel getUser(
+            @PathVariable("userId") Long userId
+    ) {
+        UserDto user = userService.getUser(userId);
+        ResponseModel responseModel = ResponseModel.builder().build();
+        responseModel.addData("user", user);
+        return responseModel;
+    }
+
     @Operation(summary = "유저 삭제", description = "회원 탈퇴")
 //    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @DeleteMapping("/delete/{userId}")

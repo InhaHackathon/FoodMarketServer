@@ -4,7 +4,7 @@ import com.inhahackathon.foodmarket.exception.NotFoundException;
 import com.inhahackathon.foodmarket.repository.BoardRepository;
 import com.inhahackathon.foodmarket.repository.LikesRepository;
 import com.inhahackathon.foodmarket.repository.UserRepository;
-import com.inhahackathon.foodmarket.type.dto.BoardDto;
+import com.inhahackathon.foodmarket.type.dto.BoardResponseDto;
 import com.inhahackathon.foodmarket.type.entity.Board;
 import com.inhahackathon.foodmarket.type.entity.Likes;
 import com.inhahackathon.foodmarket.type.entity.User;
@@ -37,13 +37,13 @@ public class LikesService {
     }
 
     @Transactional
-    public List<BoardDto> getLikeBoard(Long userId) {
+    public List<BoardResponseDto> getLikeBoard(Long userId) {
         User user = userRepository.getUserByUserId(userId).orElseThrow(() -> new NotFoundException("해당 유저가 없습니다."));
         List<Likes> likesList = likesRepository.findAllByUserId(user);
-        List<BoardDto> boardList = new ArrayList<>();
+        List<BoardResponseDto> boardList = new ArrayList<>();
         for (Likes l : likesList) {
             Board board = boardRepository.findById(l.getBoardId().getBoardId()).orElseThrow(() -> new NotFoundException("해당 게시글이 없습니다."));
-            BoardDto boardDto = BoardDto.builder()
+            BoardResponseDto boardResponseDto = BoardResponseDto.builder()
                     .boardId(board.getBoardId())
                     .productName(board.getProductName())
                     .productImg(board.getProductImg())
@@ -53,7 +53,7 @@ public class LikesService {
                     .likeCount(board.getLikeCount())
                     .isLike(true)
                     .build();
-            boardList.add(boardDto);
+            boardList.add(boardResponseDto);
         }
         return boardList;
     }

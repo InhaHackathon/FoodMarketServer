@@ -2,7 +2,7 @@ package com.inhahackathon.foodmarket.controller;
 
 import com.inhahackathon.foodmarket.exception.PermissionDeniedException;
 import com.inhahackathon.foodmarket.service.LikesService;
-import com.inhahackathon.foodmarket.type.dto.BoardDto;
+import com.inhahackathon.foodmarket.type.dto.BoardResponseDto;
 import com.inhahackathon.foodmarket.type.dto.ResponseModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -56,7 +56,7 @@ public class LikesController {
 //        if (!userId.equals(AuthUtil.getAuthenticationInfoUserId())) {
 //            throw new PermissionDeniedException();
 //        }
-        List<BoardDto> likesList = likesService.getLikeBoard(userId);
+        List<BoardResponseDto> likesList = likesService.getLikeBoard(userId);
         ResponseModel responseModel = ResponseModel.builder().build();
         responseModel.addData("likesList", likesList);
         return responseModel;

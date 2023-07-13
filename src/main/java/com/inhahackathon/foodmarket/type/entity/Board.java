@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Table(name = "board", indexes =
     @Index(name = "idx_writer_id", columnList = "writer_id")
 )

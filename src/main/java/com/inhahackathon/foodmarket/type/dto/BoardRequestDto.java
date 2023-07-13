@@ -11,9 +11,7 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @Builder
-public class BoardDto {
-
-    private Long boardId;
+public class BoardRequestDto {
 
     private String productName;
 
@@ -24,9 +22,5 @@ public class BoardDto {
     private Long price;
 
     private String description;
-
-    private Long likeCount;
-
-    private Boolean isLike;
 
 }

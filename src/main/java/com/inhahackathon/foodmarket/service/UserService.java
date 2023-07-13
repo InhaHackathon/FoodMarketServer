@@ -59,6 +59,17 @@ public class UserService {
         return newUser;
     }
 
+    public UserDto getUser(Long userId) {
+        User user = userRepository.getUserByUserId(userId).orElseThrow(() -> new NotFoundException("해당 유저가 없습니다."));
+        UserDto userDto = UserDto.builder()
+                .userId(userId)
+                .name(user.getName())
+                .location(user.getLocation())
+                .profileImgUrl(user.getProfileImgUrl())
+                .build();
+        return userDto;
+    }
+
     @Transactional
     public void updateUser(UserDto userDto) throws SearchResultNotExistException, NotAllowValueException {
         User user = userRepository.getUserByUserId(userDto.getUserId()).orElseThrow(() -> new NotFoundException("해당 유저가 없습니다."));
