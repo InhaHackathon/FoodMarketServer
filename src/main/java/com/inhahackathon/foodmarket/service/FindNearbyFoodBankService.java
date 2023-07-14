@@ -16,7 +16,6 @@ public class FindNearbyFoodBankService {
 
 
         List<FoodBank> foodBanks;
-        Map<FoodBank, Double> foodBanksAndDistance = new HashMap<>();
         List<FoodBankDto> nearbyFoodBanks = new ArrayList<>();
 
         //모든 FoodBank 정보를 가져와 5km 이내의 FoodBank만 저장함
@@ -29,19 +28,18 @@ public class FindNearbyFoodBankService {
 //            System.out.println(" / fb.getLongitude() = " + fb.getLongitude());
             if ( distance <= 5000 ){
 
-                FoodBankDto foodBankDto = new FoodBankDto();
-                foodBankDto.setFoodBankId( fb.getFoodBankId() );
-                foodBankDto.setDistrict( fb.getDistrict() );
-                foodBankDto.setCenterType( fb.getCenterType() );
-                foodBankDto.setName( fb.getName() );
-                foodBankDto.setTel( fb.getTel() );
-                foodBankDto.setAddress( fb.getAddress() );
-                foodBankDto.setDetailAddress( fb.getDetailAddress() );
-                foodBankDto.setLatitude(fb.getLatitude() );
-                foodBankDto.setLatitude( fb.getLongitude() );
-                foodBankDto.setDirectDistance( distance );
-
-                foodBanksAndDistance.put(fb, distance);
+                FoodBankDto foodBankDto = FoodBankDto.builder()
+                        .foodBankId(fb.getFoodBankId())
+                        .district(fb.getDistrict())
+                        .centerType(fb.getCenterType())
+                        .name(fb.getName())
+                        .tel(fb.getTel())
+                        .address(fb.getAddress())
+                        .detailAddress(fb.getDetailAddress())
+                        .latitude(fb.getLatitude())
+                        .longitude(fb.getLongitude())
+                        .directDistance(distance)
+                        .build();
 
                 nearbyFoodBanks.add( foodBankDto );
             }
