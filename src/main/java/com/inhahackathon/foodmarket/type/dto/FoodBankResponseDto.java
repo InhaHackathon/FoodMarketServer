@@ -1,4 +1,4 @@
-package com.inhahackathon.foodmarket.type.entity;
+package com.inhahackathon.foodmarket.type.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class FoodBankDto {
+public class FoodBankResponseDto {
 
     @Id
     private Long foodBankId;

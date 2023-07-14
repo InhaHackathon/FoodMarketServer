@@ -30,6 +30,7 @@ public class UserController {
         AuthToken authToken = userService.getUserToken(user);
         ResponseModel responseModel = ResponseModel.builder().build();
         responseModel.addData("jwt", authToken.getToken());
+        responseModel.addData("userId", user.getUserId());
         return responseModel;
     }
 

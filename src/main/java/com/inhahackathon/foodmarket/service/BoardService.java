@@ -7,6 +7,7 @@ import com.inhahackathon.foodmarket.repository.LikesRepository;
 import com.inhahackathon.foodmarket.repository.UserRepository;
 import com.inhahackathon.foodmarket.type.dto.BoardRequestDto;
 import com.inhahackathon.foodmarket.type.dto.BoardResponseDto;
+import com.inhahackathon.foodmarket.type.dto.UserDto;
 import com.inhahackathon.foodmarket.type.entity.Board;
 import com.inhahackathon.foodmarket.type.entity.LikesPK;
 import com.inhahackathon.foodmarket.type.entity.User;
@@ -78,9 +79,17 @@ public class BoardService {
     public BoardResponseDto getBoard(Long boardId, Long userId) {
         Board board = boardRepository.findById(boardId).orElseThrow(() -> new NotFoundException("해당 게시글이 없습니다."));
         User user = userRepository.getUserByUserId(userId).orElseThrow(() -> new NotFoundException("해당 유저가 없습니다."));
-        Boolean isLike = (likesRepository.findById(new LikesPK(user, board)).isEmpty()) ? false : true;
+        User writer = userRepository.getUserByUserId(board.getWriterId().getUserId()).orElseThrow(() -> new NotFoundException("해당 유저가 없습니다."));
+        UserDto userDto = UserDto.builder()
+                .userId(writer.getUserId())
+                .name(writer.getName())
+                .location(writer.getLocation())
+                .profileImgUrl(writer.getProfileImgUrl())
+                .build();
+        Boolean isLike = likesRepository.findById(new LikesPK(user, board)).isPresent();
         BoardResponseDto boardResponseDto = BoardResponseDto.builder()
                 .boardId(boardId)
+                .writer(userDto)
                 .productName(board.getProductName())
                 .productImg(board.getProductImg())
                 .expirationDate(board.getExpirationDate())
@@ -98,7 +107,7 @@ public class BoardService {
         List<Board> boardList = boardRepository.findAll();
         User user = userRepository.getUserByUserId(userId).orElseThrow(() -> new NotFoundException("해당 유저가 없습니다."));
         for (Board b : boardList) {
-            Boolean isLike = (likesRepository.findById(new LikesPK(user, b)).isEmpty()) ? false : true;
+            Boolean isLike = likesRepository.findById(new LikesPK(user, b)).isPresent();
             BoardResponseDto boardResponseDto = BoardResponseDto.builder()
                     .boardId(b.getBoardId())
                     .productName(b.getProductName())
@@ -120,7 +129,7 @@ public class BoardService {
         List<BoardResponseDto> boardResponseDtoList = new ArrayList<>();
         List<Board> boardList = boardRepository.findAllByWriterId(user);
         for (Board b : boardList) {
-            Boolean isLike = (likesRepository.findById(new LikesPK(user, b)).isEmpty()) ? false : true;
+            Boolean isLike = likesRepository.findById(new LikesPK(user, b)).isPresent();
             BoardResponseDto boardResponseDto = BoardResponseDto.builder()
                     .boardId(b.getBoardId())
                     .productName(b.getProductName())

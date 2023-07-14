@@ -15,6 +15,8 @@ public class BoardResponseDto {
 
     private Long boardId;
 
+    private UserDto writer;
+
     private String productName;
 
     private String productImg;
