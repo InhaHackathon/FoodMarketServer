@@ -8,15 +8,16 @@ import java.time.LocalDate;
 
 @Entity
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Table(name = "board", indexes =
     @Index(name = "idx_writer_id", columnList = "writer_id")
 )
 public class Board {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardId;
 
     @ManyToOne
