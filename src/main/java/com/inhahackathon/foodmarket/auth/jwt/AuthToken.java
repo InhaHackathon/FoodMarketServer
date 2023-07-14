@@ -24,12 +24,28 @@ public class AuthToken {
 		token = createToken(id, role, expiry);
 	}
 
+	AuthToken(Map<String, Object> claims, Date expiry, Key key) {
+		this.key = key;
+		token = createToken(claims, expiry);
+	}
+
 	private String createToken(String id, String role, Date expiry) {
 		return Jwts.builder()
 				.setHeaderParam("typ", "JWT")
 				.setSubject("token")
 				.claim("id", id)
 				.claim("role", role)
+				.setIssuedAt(new Date())
+				.setExpiration(expiry)
+				.signWith(key, SignatureAlgorithm.HS256)
+				.compact();
+	}
+
+	private String createToken(Map<String, Object> claims, Date expiry) {
+		return Jwts.builder()
+				.setHeaderParam("typ", "JWT")
+				.setSubject("token")
+				.addClaims(claims)
 				.setIssuedAt(new Date())
 				.setExpiration(expiry)
 				.signWith(key, SignatureAlgorithm.HS256)
