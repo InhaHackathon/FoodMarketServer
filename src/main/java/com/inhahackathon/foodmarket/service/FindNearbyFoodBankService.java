@@ -1,55 +1,78 @@
 package com.inhahackathon.foodmarket.service;
 
 import com.inhahackathon.foodmarket.type.entity.FoodBank;
+import com.inhahackathon.foodmarket.type.entity.FoodBankDto;
+import org.checkerframework.checker.units.qual.C;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+@Service
 public class FindNearbyFoodBankService {
 
-    private void calAllDistance(double curLat, double curLon){
+    private static final double EARTH_RADIUS = 6371.0; // 지구 반지름 (단위: km)
 
-        Map<FoodBank, Double> nearbyFoodBanks = new HashMap<>();
+    public static List<FoodBankDto> calAllDistance(double curLat, double curLon){
+
+
+        List<FoodBank> foodBanks;
+        Map<FoodBank, Double> foodBanksAndDistance = new HashMap<>();
+        List<FoodBankDto> nearbyFoodBanks = new ArrayList<>();
 
         //모든 FoodBank 정보를 가져와 5km 이내의 FoodBank만 저장함
-        List<FoodBank> all = FoodBankService.getAll();
-        for ( FoodBank fb : all) {
-            double distance = calDistance(curLat, curLon, fb.getLatitude(), fb.getLongitude());
-
+        foodBanks = FoodBankService.getAll();
+        for ( FoodBank fb : foodBanks) {
+            double distance = calculateDistance(curLat, curLon, fb.getLatitude(), fb.getLongitude());
+//            System.out.print("curLat = " + curLat);
+//            System.out.print(" / curLon = " + curLon);
+//            System.out.print(" / fb.getLatitude() = " + fb.getLatitude());
+//            System.out.println(" / fb.getLongitude() = " + fb.getLongitude());
             if ( distance <= 5000 ){
-                nearbyFoodBanks.put(fb, distance);
+
+                FoodBankDto foodBankDto = new FoodBankDto();
+                foodBankDto.setFoodBankId( fb.getFoodBankId() );
+                foodBankDto.setDistrict( fb.getDistrict() );
+                foodBankDto.setCenterType( fb.getCenterType() );
+                foodBankDto.setName( fb.getName() );
+                foodBankDto.setTel( fb.getTel() );
+                foodBankDto.setAddress( fb.getAddress() );
+                foodBankDto.setDetailAddress( fb.getDetailAddress() );
+                foodBankDto.setLatitude(fb.getLatitude() );
+                foodBankDto.setLatitude( fb.getLongitude() );
+                foodBankDto.setDirectDistance( distance );
+
+                foodBanksAndDistance.put(fb, distance);
+
+                nearbyFoodBanks.add( foodBankDto );
             }
         }
 
-        // Map을 List로 변환하여 정렬
-        List<Map.Entry<FoodBank, Double>> nearbyFoodBankList = new ArrayList<>(nearbyFoodBanks.entrySet());
+        Comparator<FoodBankDto> comparator = new Comparator<FoodBankDto>() {
+            @Override
+            public int compare(FoodBankDto o1, FoodBankDto o2) {
+                return (int)(o1.getDirectDistance() - o2.getDirectDistance());
+            }
+        };
 
         // Double 값을 기준으로 오름차순 정렬
-        Collections.sort(nearbyFoodBankList, Comparator.comparing(Map.Entry::getValue));
+        Collections.sort(nearbyFoodBanks, comparator);
 
         // 최대 5개까지만 유지
-        if (nearbyFoodBankList.size() > 5) {
-            nearbyFoodBankList = nearbyFoodBankList.subList(0, 5);
+        if (nearbyFoodBanks.size() > 10) {
+            nearbyFoodBanks = nearbyFoodBanks.subList(0, 5);
         }
 
-
+        return nearbyFoodBanks;
     }
 
-    private double calDistance(double lat1, double lon1, double lat2, double lon2){
-        double theta = lon1 - lon2;
-        double dist = Math.sin(deg2rad(lat1))* Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1))*Math.cos(deg2rad(lat2))*Math.cos(deg2rad(theta));
-        dist = Math.acos(dist);
-        dist = rad2deg(dist);
-        dist = dist * 60*1.1515*1609.344;
+    private static double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+        // 위도 차이와 경도 차이 계산
+        double latDiff = lat2 - lat1;
+        double lonDiff = lon2 - lon1;
 
-        return dist; //단위 meter
-    }
-    //10진수를 radian(라디안)으로 변환
-    private double deg2rad(double deg){
-        return (deg * Math.PI/180.0);
-    }
-    //radian(라디안)을 10진수로 변환
-    private double rad2deg(double rad){
-        return (rad * 180 / Math.PI);
-    }
+        // 직선 거리 계산
+        double distance = Math.sqrt(Math.pow(latDiff, 2) + Math.pow(lonDiff, 2)) * 111000;
 
+        return distance;
+    }
 }
