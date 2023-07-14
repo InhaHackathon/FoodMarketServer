@@ -71,13 +71,10 @@ public class BoardService {
     @Transactional
     public void deleteAllUserBoard(User writerId) {
         List<Board> boardList = boardRepository.findAllByWriterId(writerId);
-        log.info("boardList : {}", boardList);
         for (Board b : boardList) {
-            log.info("board({}) : {}", b.getBoardId(), b);
             likesRepository.deleteByBoardId(b.getBoardId());
-            boardRepository.delete(b);
-            log.info("Deleted board: {}", b);
         }
+        boardRepository.deleteAll(boardList);
     }
 
     @Transactional

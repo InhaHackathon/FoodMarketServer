@@ -1,5 +1,6 @@
 package com.inhahackathon.foodmarket.controller;
 
+import com.inhahackathon.foodmarket.auth.util.AuthUtil;
 import com.inhahackathon.foodmarket.exception.PermissionDeniedException;
 import com.inhahackathon.foodmarket.service.LikesService;
 import com.inhahackathon.foodmarket.type.dto.BoardResponseDto;
@@ -27,8 +28,8 @@ public class LikesController {
     public ResponseModel createLikeBoard(
             @PathVariable("boardId") Long boardId
     ) throws PermissionDeniedException {
-//        Long userId = AuthUtil.getAuthenticationInfoUserId();
-        Long userId = 1L; // 임시
+        Long userId = AuthUtil.getAuthenticationInfoUserId();
+//        Long userId = 1L; // 임시
         likesService.createLikeBoard(userId, boardId);
         ResponseModel responseModel = ResponseModel.builder().build();
         return responseModel;
@@ -40,8 +41,8 @@ public class LikesController {
     public ResponseModel deleteLikeBoard(
             @PathVariable("boardId") Long boardId
     ) throws PermissionDeniedException {
-//        Long userId = AuthUtil.getAuthenticationInfoUserId();
-        Long userId = 1L; // 임시
+        Long userId = AuthUtil.getAuthenticationInfoUserId();
+//        Long userId = 1L; // 임시
         likesService.deleteLikeBoard(userId, boardId);
         ResponseModel responseModel = ResponseModel.builder().build();
         return responseModel;
@@ -53,9 +54,9 @@ public class LikesController {
     public ResponseModel getLikeBoardList(
             @PathVariable("userId") Long userId
     ) throws PermissionDeniedException {
-//        if (!userId.equals(AuthUtil.getAuthenticationInfoUserId())) {
-//            throw new PermissionDeniedException();
-//        }
+        if (!userId.equals(AuthUtil.getAuthenticationInfoUserId())) {
+            throw new PermissionDeniedException();
+        }
         List<BoardResponseDto> likesList = likesService.getLikeBoard(userId);
         ResponseModel responseModel = ResponseModel.builder().build();
         responseModel.addData("likesList", likesList);
