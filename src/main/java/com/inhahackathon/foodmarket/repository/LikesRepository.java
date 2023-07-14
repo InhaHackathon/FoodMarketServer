@@ -29,4 +29,10 @@ public interface LikesRepository extends JpaRepository<Likes, LikesPK> {
     @Query("DELETE FROM Likes l WHERE l = :like")
     void deleteLike(@Param("like") Likes like);
 
+    Long countByBoardId(Board boardId);
+
+    @Modifying
+    @Query("DELETE FROM Likes l WHERE l.userId.userId = :userId AND l.boardId.boardId = :boardId")
+    void deleteByUserIdAndBoardId(@Param("userId") Long userId, @Param("boardId") Long boardId);
+
 }

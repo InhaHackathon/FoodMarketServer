@@ -28,12 +28,18 @@ public class LikesService {
         User user = userRepository.findById(userId).orElseThrow(() -> new NotFoundException("해당 사용자가 없습니다."));
         Board board = boardRepository.findById(boardId).orElseThrow(() -> new NotFoundException("해당 게시글이 없습니다."));
         likesRepository.saveLikes(user.getUserId(), board.getBoardId());
+        Long likeCount = likesRepository.countByBoardId(board);
+        board.setLikeCount(likeCount);
+        boardRepository.save(board);
     }
 
     @Transactional
-    public void deleteLikeBoard(Long boardId) {
+    public void deleteLikeBoard(Long userId, Long boardId) {
         Board board = boardRepository.findById(boardId).orElseThrow(() -> new NotFoundException("해당 게시글이 없습니다."));
-        likesRepository.deleteByBoardId(boardId);
+        likesRepository.deleteByUserIdAndBoardId(userId, boardId);
+        Long likeCount = likesRepository.countByBoardId(board);
+        board.setLikeCount(likeCount);
+        boardRepository.save(board);
     }
 
     @Transactional
