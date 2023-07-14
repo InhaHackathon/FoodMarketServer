@@ -22,7 +22,7 @@ public class FoodBankController {
     private final FoodBankService foodBankService;
 
     @Operation(summary = "푸드뱅크 전체 목록", description = "푸드뱅크 전체 목록<br>" +
-            "현재 경위도 입력(ex: 37.3450775, 126.654308)<br>" +
+            "현재 경위도 입력(ex: 37.45085008, 126.6543226)<br>" +
             "Double latitude;<br>" +
             "Double longitude;")
     @PostMapping("/list")

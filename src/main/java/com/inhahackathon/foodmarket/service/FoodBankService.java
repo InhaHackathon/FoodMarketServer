@@ -26,6 +26,8 @@ public class FoodBankService {
         double longitude = foodBankRequestDto.getLongitude();
         for (FoodBank f : foodBankList) {
             double directDistance = mapUtil.calculateDistance(f, latitude, longitude);
+            if (directDistance > 10000)
+                continue;
             FoodBankResponseDto foodBankResponseDto = FoodBankResponseDto.builder()
                     .foodBankId(f.getFoodBankId())
                     .district(f.getDistrict())
@@ -39,10 +41,11 @@ public class FoodBankService {
                     .directDistance(directDistance)
                     .build();
             foodBankResponseDtoList.add(foodBankResponseDto);
-            if (foodBankResponseDtoList.size() > 10)
-                break;
         }
         Collections.sort(foodBankResponseDtoList, (o1, o2) -> (int)(o1.getDirectDistance() - o2.getDirectDistance()));
+        if (foodBankResponseDtoList.size() > 10) {
+            foodBankResponseDtoList = foodBankResponseDtoList.subList(0, 10);
+        }
         return foodBankResponseDtoList;
     }
 
