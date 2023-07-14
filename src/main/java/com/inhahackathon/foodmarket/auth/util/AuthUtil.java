@@ -10,7 +10,7 @@ public class AuthUtil {
         return (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
-    public static long getAuthenticationInfoSeq() throws UnAuthorizeException {
+    public static long getAuthenticationInfoUserId() throws UnAuthorizeException {
         try {
             return Long.parseLong(getAuthenticationInfo().getUsername());
         } catch (NumberFormatException | NullPointerException e) {
