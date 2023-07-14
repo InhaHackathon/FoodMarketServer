@@ -42,7 +42,7 @@ public class LikesController {
     ) throws PermissionDeniedException {
 //        Long userId = AuthUtil.getAuthenticationInfoUserId();
         Long userId = 1L; // 임시
-        likesService.deleteLikeBoard(boardId);
+        likesService.deleteLikeBoard(userId, boardId);
         ResponseModel responseModel = ResponseModel.builder().build();
         return responseModel;
     }
