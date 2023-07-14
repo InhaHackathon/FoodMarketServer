@@ -27,7 +27,6 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final BoardService boardService;
-    private final LikesService likesService;
     private final FirebaseApp firebaseApp;
     private final AuthTokenProvider authTokenProvider;
     private static final long TOKEN_DURATION = 1000L * 60L * 60L * 24L;
@@ -90,7 +89,7 @@ public class UserService {
     @Transactional
     public void deleteUser(Long userId) {
         User user = userRepository.getUserByUserId(userId).orElseThrow(() -> new NotFoundException("해당 유저가 없습니다."));
-        boardService.deleteAllBoard(user);
+        boardService.deleteAllUserBoard(user);
         userRepository.deleteById(userId);
     }
 
