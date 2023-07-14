@@ -39,10 +39,10 @@ public class FoodBankService {
                     .directDistance(directDistance)
                     .build();
             foodBankResponseDtoList.add(foodBankResponseDto);
+            if (foodBankResponseDtoList.size() > 10)
+                break;
         }
-        Collections.sort(foodBankResponseDtoList, (o1, o2) -> {
-            return (int)(o1.getDirectDistance() - o2.getDirectDistance());
-        });
+        Collections.sort(foodBankResponseDtoList, (o1, o2) -> (int)(o1.getDirectDistance() - o2.getDirectDistance()));
         return foodBankResponseDtoList;
     }
 

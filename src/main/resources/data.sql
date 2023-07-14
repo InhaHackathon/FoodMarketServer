@@ -1,5 +1,5 @@
 -- User
-insert into user(user_id, uid, name, location, profile_img_url, role, provider) values (1,'4r9JXjmsTtYV0N4ixRTSSCk3JIH2' ,'박동민','null','https://lh3.googleusercontent.com/a/AAcHTtdkU4M2AkI9b9XtfuQpunjoWHTG2XbGfqdwZfZ4fHnYYRk=s96-c ' , ' USER','GOOGLE');
+insert into user(user_id, uid, name, location, profile_img_url, role, provider) values (1,'4r9JXjmsTtYV0N4ixRTSSCk3JIH2' ,'박동민','용현동','https://lh3.googleusercontent.com/a/AAcHTtdkU4M2AkI9b9XtfuQpunjoWHTG2XbGfqdwZfZ4fHnYYRk=s96-c ' , ' USER','GOOGLE');
 insert into user(user_id, uid, name, location, profile_img_url, role, provider) values (2,'null' ,'김지현','null','https://lh3.googleusercontent.com/a/AAcHTtdkU4M2AkI9b9XtfuQpunjoWHTG2XbGfqdwZfZ4fHnYYRk=s96-c ' , ' USER','GOOGLE');
 insert into user(user_id, uid, name, location, profile_img_url, role, provider) values (3,'null' ,'이승아','null','https://lh3.googleusercontent.com/a/AAcHTtdkU4M2AkI9b9XtfuQpunjoWHTG2XbGfqdwZfZ4fHnYYRk=s96-c ' , ' USER','GOOGLE');
 insert into user(user_id, uid, name, location, profile_img_url, role, provider) values (4,'null' ,'박민지','null','https://lh3.googleusercontent.com/a/AAcHTtdkU4M2AkI9b9XtfuQpunjoWHTG2XbGfqdwZfZ4fHnYYRk=s96-c ' , ' USER','GOOGLE');
