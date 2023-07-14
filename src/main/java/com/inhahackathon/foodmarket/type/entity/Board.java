@@ -17,6 +17,7 @@ import java.time.LocalDate;
 public class Board {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardId;
 
     @ManyToOne
