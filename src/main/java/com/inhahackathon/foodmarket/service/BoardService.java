@@ -64,23 +64,19 @@ public class BoardService {
     @Transactional
     public void deleteBoard(Long boardId) {
         Board board = boardRepository.findById(boardId).orElseThrow(() -> new NotFoundException("해당 게시글이 없습니다."));
-        List<Likes> likesList = likesRepository.findAllByBoardId(board);
-        for (Likes l : likesList) {
-            likesRepository.delete(l);
-        }
+        likesRepository.deleteByBoardId(boardId);
         boardRepository.delete(board);
     }
 
     @Transactional
-    public void deleteAllBoard(User writerId) {
-        log.info("Deleting boards and related likes for writerId: {}", writerId);
+    public void deleteAllUserBoard(User writerId) {
         List<Board> boardList = boardRepository.findAllByWriterId(writerId);
-        for (Board board : boardList) {
-            List<Likes> likesList = likesRepository.findAllByBoardId(board);
-            for (Likes l : likesList) {
-                likesRepository.delete(l);
-            }
-            boardRepository.delete(board);
+        log.info("boardList : {}", boardList);
+        for (Board b : boardList) {
+            log.info("board({}) : {}", b.getBoardId(), b);
+            likesRepository.deleteByBoardId(b.getBoardId());
+            boardRepository.delete(b);
+            log.info("Deleted board: {}", b);
         }
     }
 
