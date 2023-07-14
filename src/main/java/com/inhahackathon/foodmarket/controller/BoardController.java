@@ -36,8 +36,7 @@ public class BoardController {
     public ResponseModel createBoard(
             @RequestBody BoardRequestDto boardRequestDto
     ) {
-        Long userId = AuthUtil.getAuthenticationInfoUserId();
-        User user = userRepository.findById(userId).get();
+        User user = AuthUtil.getAuthenticationInfo();
         boardService.createBoard(user, boardRequestDto);
         ResponseModel responseModel = ResponseModel.builder().build();
         return responseModel;

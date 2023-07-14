@@ -52,7 +52,7 @@ public class UserController {
     }
 
     @Operation(summary = "유저 정보", description = "프로필 정보 조회")
-    @DeleteMapping("/{userId}")
+    @GetMapping("/{userId}")
     public ResponseModel getUser(
             @PathVariable("userId") Long userId
     ) {
