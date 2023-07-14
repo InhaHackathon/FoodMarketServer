@@ -37,7 +37,8 @@ public class BoardController {
     public ResponseModel createBoard(
             @RequestBody BoardRequestDto boardRequestDto
     ) {
-        Long userId = AuthUtil.getAuthenticationInfoUserId();
+//        Long userId = AuthUtil.getAuthenticationInfoUserId();
+        Long userId = 1L; // 임시
         User user = userRepository.findById(userId).get();
         boardService.createBoard(user, boardRequestDto);
         ResponseModel responseModel = ResponseModel.builder().build();
@@ -48,7 +49,8 @@ public class BoardController {
     @GetMapping("/list")
 //    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public ResponseModel getAllBoard() {
-        Long userId = AuthUtil.getAuthenticationInfoUserId();
+//        Long userId = AuthUtil.getAuthenticationInfoUserId();
+        Long userId = 1L; // 임시
         List<BoardResponseDto> board = boardService.getAllBoard(userId);
         ResponseModel responseModel = ResponseModel.builder().build();
         responseModel.addData("board", board);
@@ -61,7 +63,8 @@ public class BoardController {
     public ResponseModel getBoard(
             @PathVariable Long boardId
     ) {
-        Long userId = AuthUtil.getAuthenticationInfoUserId();
+//        Long userId = AuthUtil.getAuthenticationInfoUserId();
+        Long userId = 1L; // 임시
         BoardResponseDto board = boardService.getBoard(boardId, userId);
         ResponseModel responseModel = ResponseModel.builder().build();
         responseModel.addData("board", board);
@@ -72,7 +75,8 @@ public class BoardController {
     @GetMapping("/user/mypage")
 //    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public ResponseModel getMyBoard() {
-        Long userId = AuthUtil.getAuthenticationInfoUserId();
+//        Long userId = AuthUtil.getAuthenticationInfoUserId();
+        Long userId = 1L; // 임시
         List<BoardResponseDto> board = boardService.getUserBoard(userId);
         ResponseModel responseModel = ResponseModel.builder().build();
         responseModel.addData("board", board);
