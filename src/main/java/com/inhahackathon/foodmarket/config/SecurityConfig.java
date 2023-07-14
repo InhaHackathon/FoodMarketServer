@@ -7,7 +7,6 @@ import com.inhahackathon.foodmarket.auth.filter.TokenAuthFilter;
 import com.inhahackathon.foodmarket.auth.handler.OAuth2AuthenticationFailureHandler;
 import com.inhahackathon.foodmarket.auth.handler.OAuth2AuthenticationSuccessHandler;
 import com.inhahackathon.foodmarket.auth.jwt.AuthTokenProvider;
-import com.inhahackathon.foodmarket.auth.service.CustomOAuth2UserService;
 import com.inhahackathon.foodmarket.type.dto.ResponseModel;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,9 +15,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.oauth2.client.registration.ClientRegistration;
-import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
-import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -26,19 +22,14 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
 @Configuration
 @RequiredArgsConstructor
-@Slf4j
 public class SecurityConfig {
 
-    private final CustomOAuth2UserService customOAuth2UserService;
     private final AuthTokenProvider authTokenProvider;
-
-
     private static final String[] PERMIT_ALL = {
 //            "/login/**",
 //            "/v2/api-docs",

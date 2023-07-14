@@ -24,7 +24,6 @@ public class UserController {
     private final UserService userService;
 
     @Operation(summary = "Firebase 유저 연동", description = "Firebase를 통해 가입한 유저 MariaDB 연동")
-//    @Secured({"ROLE_ADMIN"})
     @RequestMapping(value = "/firebase/{uid}", method = RequestMethod.POST)
     public ResponseModel saveUserFromFirebase(@PathVariable String uid) {
         User user = userService.saveUserFromFirebase(uid);
@@ -41,13 +40,11 @@ public class UserController {
             "String name;<br>" +
             "String location;<br>" +
             "String profileImgUrl;<br>")
-    // @Secured({"ROLE_USER"})
     @PutMapping("/update")
     public ResponseModel userUpdate(
             @RequestBody UserDto userDto
     ) throws NotAllowValueException {
         Long userId = AuthUtil.getAuthenticationInfoUserId();
-//        Long userId = 1L; // 임시
         userDto.setUserId(userId);
         userService.updateUser(userDto);
         ResponseModel responseModel = ResponseModel.builder().build();
@@ -55,7 +52,6 @@ public class UserController {
     }
 
     @Operation(summary = "유저 정보", description = "프로필 정보 조회")
-//    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @DeleteMapping("/{userId}")
     public ResponseModel getUser(
             @PathVariable("userId") Long userId
@@ -67,7 +63,6 @@ public class UserController {
     }
 
     @Operation(summary = "유저 삭제", description = "회원 탈퇴")
-//    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @DeleteMapping("/delete/{userId}")
     public ResponseModel userDeleteAsUser(
             @PathVariable("userId") Long userId

@@ -6,7 +6,6 @@ import com.inhahackathon.foodmarket.type.etc.OAuthProvider;
 import com.inhahackathon.foodmarket.type.etc.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.security.Keys;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,7 +15,6 @@ import java.security.Key;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Slf4j
 public class AuthTokenProviderImpl implements AuthTokenProvider {
 
 	private final Key key;
@@ -68,6 +66,5 @@ public class AuthTokenProviderImpl implements AuthTokenProvider {
 			throw new TokenValidateException();
 		}
 	}
-
 
 }

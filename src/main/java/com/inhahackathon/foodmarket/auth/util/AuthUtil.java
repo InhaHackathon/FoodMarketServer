@@ -2,11 +2,9 @@ package com.inhahackathon.foodmarket.auth.util;
 
 import com.inhahackathon.foodmarket.type.dto.UserPrincipal;
 import com.inhahackathon.foodmarket.type.entity.User;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-@Slf4j
 public class AuthUtil {
 
     public static User getAuthenticationInfo() {

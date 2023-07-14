@@ -11,4 +11,5 @@ public class SearchResultNotExistException extends NullPointerException {
     public SearchResultNotExistException(String s) {
         super(s);
     }
+
 }

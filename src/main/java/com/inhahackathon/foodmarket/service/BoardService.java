@@ -8,11 +8,9 @@ import com.inhahackathon.foodmarket.repository.UserRepository;
 import com.inhahackathon.foodmarket.type.dto.BoardRequestDto;
 import com.inhahackathon.foodmarket.type.dto.BoardResponseDto;
 import com.inhahackathon.foodmarket.type.entity.Board;
-import com.inhahackathon.foodmarket.type.entity.Likes;
 import com.inhahackathon.foodmarket.type.entity.LikesPK;
 import com.inhahackathon.foodmarket.type.entity.User;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,7 +19,6 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class BoardService {
 
     private final BoardRepository boardRepository;

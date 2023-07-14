@@ -4,7 +4,6 @@ import com.inhahackathon.foodmarket.repository.UserRepository;
 import com.inhahackathon.foodmarket.type.dto.UserPrincipal;
 import com.inhahackathon.foodmarket.type.entity.User;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,7 +13,6 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-@Slf4j
 public class CustomUserDetailsService implements UserDetailsService {
 
 	private final UserRepository userRepository;

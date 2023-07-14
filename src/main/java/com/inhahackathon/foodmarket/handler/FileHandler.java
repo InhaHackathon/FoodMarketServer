@@ -16,7 +16,6 @@ public class FileHandler {
 
     @Value("${resource.file.path}")
     private String filePath;
-
     @Value("${resource.file.allow-extension}")
     private String[] allowExtensions;
 
@@ -65,4 +64,5 @@ public class FileHandler {
     private boolean validateFilename(String fileName) {
         return !Strings.isNullOrEmpty(fileName);
     }
+
 }

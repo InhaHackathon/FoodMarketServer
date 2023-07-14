@@ -27,29 +27,25 @@ public class LikesController {
     @GetMapping("/{boardId}")
     public ResponseModel createLikeBoard(
             @PathVariable("boardId") Long boardId
-    ) throws PermissionDeniedException {
+    ) {
         Long userId = AuthUtil.getAuthenticationInfoUserId();
-//        Long userId = 1L; // 임시
         likesService.createLikeBoard(userId, boardId);
         ResponseModel responseModel = ResponseModel.builder().build();
         return responseModel;
     }
 
     @Operation(summary = "게시글 좋아요 취소", description = "관심 등록 취소")
-//    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @DeleteMapping("/{boardId}")
     public ResponseModel deleteLikeBoard(
             @PathVariable("boardId") Long boardId
-    ) throws PermissionDeniedException {
+    ) {
         Long userId = AuthUtil.getAuthenticationInfoUserId();
-//        Long userId = 1L; // 임시
         likesService.deleteLikeBoard(userId, boardId);
         ResponseModel responseModel = ResponseModel.builder().build();
         return responseModel;
     }
 
     @Operation(summary = "유저 좋아요 목록 조회", description = "관심목록 조회")
-//    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/list/{userId}")
     public ResponseModel getLikeBoardList(
             @PathVariable("userId") Long userId

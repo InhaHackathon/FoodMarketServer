@@ -32,13 +32,11 @@ public class BoardController {
             "LocalDate expirationDate(not null);<br>" +
             "Long price(not null);<br> +" +
             "String description;")
-//    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PostMapping("/create")
     public ResponseModel createBoard(
             @RequestBody BoardRequestDto boardRequestDto
     ) {
         Long userId = AuthUtil.getAuthenticationInfoUserId();
-//        Long userId = 1L; // 임시
         User user = userRepository.findById(userId).get();
         boardService.createBoard(user, boardRequestDto);
         ResponseModel responseModel = ResponseModel.builder().build();
@@ -47,10 +45,8 @@ public class BoardController {
 
     @Operation(summary = "게시글 전체 목록", description = "게시글 전체 목록")
     @GetMapping("/list")
-//    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public ResponseModel getAllBoard() {
         Long userId = AuthUtil.getAuthenticationInfoUserId();
-//        Long userId = 1L; // 임시
         List<BoardResponseDto> board = boardService.getAllBoard(userId);
         ResponseModel responseModel = ResponseModel.builder().build();
         responseModel.addData("board", board);
@@ -59,12 +55,10 @@ public class BoardController {
 
     @Operation(summary = "게시글 상세보기", description = "게시글 상세보기")
     @GetMapping("/list/{boardId}")
-//    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public ResponseModel getBoard(
             @PathVariable Long boardId
     ) {
         Long userId = AuthUtil.getAuthenticationInfoUserId();
-//        Long userId = 1L; // 임시
         BoardResponseDto board = boardService.getBoard(boardId, userId);
         ResponseModel responseModel = ResponseModel.builder().build();
         responseModel.addData("board", board);
@@ -73,10 +67,8 @@ public class BoardController {
 
     @Operation(summary = "내 게시글 조회", description = "마이페이지(판매내역)")
     @GetMapping("/user/mypage")
-//    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public ResponseModel getMyBoard() {
         Long userId = AuthUtil.getAuthenticationInfoUserId();
-//        Long userId = 1L; // 임시
         List<BoardResponseDto> board = boardService.getUserBoard(userId);
         ResponseModel responseModel = ResponseModel.builder().build();
         responseModel.addData("board", board);
@@ -85,7 +77,6 @@ public class BoardController {
 
     @Operation(summary = "유저 게시글 조회", description = "유저 프로필")
     @GetMapping("/user/{userId}")
-//    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public ResponseModel getUserBoard(
             @PathVariable Long userId
     ) {
@@ -103,9 +94,7 @@ public class BoardController {
             "LocalDate expirationDate(not null);<br>" +
             "Long price(not null);<br> +" +
             "String description;")
-//    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PostMapping("/update/{boardId}")
-//    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public ResponseModel createBoard(
             @PathVariable Long boardId,
             @RequestBody BoardRequestDto boardRequestDto
@@ -117,7 +106,6 @@ public class BoardController {
 
     @Operation(summary = "게시글 삭제", description = "게시글 삭제")
     @DeleteMapping("/delete/{boardId}")
-//    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public ResponseModel deleteBoard(
             @PathVariable Long boardId
     ) {

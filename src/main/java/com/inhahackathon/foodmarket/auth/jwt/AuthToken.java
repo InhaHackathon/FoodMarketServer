@@ -16,7 +16,6 @@ public class AuthToken {
 
 	@Getter
 	private final String token;
-
 	private final Key key;
 
 	AuthToken(String id, String role, Date expiry, Key key) {
@@ -69,4 +68,5 @@ public class AuthToken {
 		}
 		return claims;
 	}
+
 }

@@ -6,7 +6,6 @@ import com.inhahackathon.foodmarket.auth.jwt.AuthTokenProvider;
 import com.inhahackathon.foodmarket.type.dto.ResponseModel;
 import com.inhahackathon.foodmarket.type.dto.UserPrincipal;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -20,7 +19,6 @@ import java.util.Date;
 import java.util.stream.Collectors;
 
 @Component
-@Slf4j
 @RequiredArgsConstructor
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 

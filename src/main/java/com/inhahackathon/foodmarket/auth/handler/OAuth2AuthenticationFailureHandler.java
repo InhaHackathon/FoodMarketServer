@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class OAuth2AuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
+
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 										AuthenticationException exception) throws IOException {
@@ -23,4 +24,5 @@ public class OAuth2AuthenticationFailureHandler extends SimpleUrlAuthenticationF
 		OutputStream outputStream = response.getOutputStream();
 		outputStream.write(responseModel.toJson().getBytes());
 	}
+
 }

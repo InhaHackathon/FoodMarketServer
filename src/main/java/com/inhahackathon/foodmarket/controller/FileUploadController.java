@@ -23,7 +23,6 @@ public class FileUploadController {
 
     @Operation(summary = "파일 업로드", description = "Long boardId(게시글 업로드일 때만 입력)" +
             "MultipartFile multipartFile(필수)")
-//    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public ResponseModel upload(
             @RequestParam(value = "id", required = false) Long boardId,

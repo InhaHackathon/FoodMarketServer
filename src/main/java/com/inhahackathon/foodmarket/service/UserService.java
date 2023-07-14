@@ -21,7 +21,6 @@ import com.inhahackathon.foodmarket.type.entity.UserInfoSet;
 import com.inhahackathon.foodmarket.type.etc.OAuthProvider;
 import com.inhahackathon.foodmarket.type.etc.Role;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -29,7 +28,6 @@ import java.util.Date;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class UserService {
 
     private final UserRepository userRepository;

@@ -3,6 +3,7 @@ package com.inhahackathon.foodmarket.exception;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
 
 public class FileUploadFailException extends FileUploadException {
+
     private static final String DEFAULT_MESSAGE = "File Upload Fail!";
 
     public FileUploadFailException() {
@@ -20,4 +21,5 @@ public class FileUploadFailException extends FileUploadException {
     public FileUploadFailException(String msg, Throwable throwable) {
         super(msg, throwable);
     }
+
 }

@@ -7,6 +7,7 @@ import com.inhahackathon.foodmarket.type.etc.OAuthProvider;
 import java.util.Map;
 
 public class OAuth2UserInfoFactory {
+
 	public static OAuthUserInfo of(OAuthProvider oAuthProvider, Map<String, Object> attributes) throws
 		IllegalArgumentException {
 		switch (oAuthProvider) {
@@ -16,4 +17,5 @@ public class OAuth2UserInfoFactory {
 				throw new IllegalArgumentException("OAuthProvider Not Excepted!!");
 		}
 	}
+
 }
