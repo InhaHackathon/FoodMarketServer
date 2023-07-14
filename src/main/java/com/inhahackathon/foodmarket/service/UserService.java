@@ -10,12 +10,18 @@ import com.inhahackathon.foodmarket.auth.jwt.AuthTokenProvider;
 import com.inhahackathon.foodmarket.exception.NotAllowValueException;
 import com.inhahackathon.foodmarket.exception.NotFoundException;
 import com.inhahackathon.foodmarket.exception.SearchResultNotExistException;
+import com.inhahackathon.foodmarket.repository.OAuthUserRepository;
+import com.inhahackathon.foodmarket.repository.UserInfoSetRepository;
 import com.inhahackathon.foodmarket.repository.UserRepository;
 import com.inhahackathon.foodmarket.type.dto.UserDto;
+import com.inhahackathon.foodmarket.type.dto.UserPrincipal;
+import com.inhahackathon.foodmarket.type.entity.OAuthUser;
 import com.inhahackathon.foodmarket.type.entity.User;
+import com.inhahackathon.foodmarket.type.entity.UserInfoSet;
 import com.inhahackathon.foodmarket.type.etc.OAuthProvider;
 import com.inhahackathon.foodmarket.type.etc.Role;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -23,9 +29,12 @@ import java.util.Date;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UserInfoSetRepository userInfoSetRepository;
+    private final OAuthUserRepository oAuthUserRepository;
     private final BoardService boardService;
     private final FirebaseApp firebaseApp;
     private final AuthTokenProvider authTokenProvider;
@@ -54,6 +63,18 @@ public class UserService {
                 .provider(OAuthProvider.GOOGLE)
                 .build();
         userRepository.save(newUser);
+
+        userInfoSetRepository.save(new UserInfoSet(newUser.getUserId()));
+
+        OAuthUser oAuthUser = OAuthUser.builder()
+                .providerUserId(userRecord.getProviderId())
+                .email(userRecord.getEmail())
+                .name(userRecord.getDisplayName())
+                .picture(userRecord.getPhotoUrl())
+                .oap(OAuthProvider.GOOGLE)
+                .user(newUser)
+                .build();
+        oAuthUserRepository.save(oAuthUser);
 
         return newUser;
     }
@@ -94,10 +115,12 @@ public class UserService {
     }
 
     public AuthToken getUserToken(User user) {
+        UserPrincipal userPrincipal = UserPrincipal.create(user);
+
         Date expiry = new Date();
         expiry.setTime(expiry.getTime() + (TOKEN_DURATION));
 
-        AuthToken authToken = authTokenProvider.createToken(user.getName(), String.valueOf(user.getRole()), expiry);
+        AuthToken authToken = authTokenProvider.createToken(userPrincipal, expiry);
         return authToken;
     }
 

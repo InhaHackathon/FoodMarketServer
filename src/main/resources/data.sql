@@ -30,6 +30,9 @@ insert into user(user_id, uid, name, location, profile_img_url, role, provider) 
 insert into user(user_id, uid, name, location, profile_img_url, role, provider) values (29,'null' ,'최하윤','null','https://lh3.googleusercontent.com/a/AAcHTtdkU4M2AkI9b9XtfuQpunjoWHTG2XbGfqdwZfZ4fHnYYRk=s96-c ' , ' USER','GOOGLE');
 insert into user(user_id, uid, name, location, profile_img_url, role, provider) values (30,'null' ,'강윤서','null','https://lh3.googleusercontent.com/a/AAcHTtdkU4M2AkI9b9XtfuQpunjoWHTG2XbGfqdwZfZ4fHnYYRk=s96-c ' , ' USER','GOOGLE');
 
+-- OAuthUser
+insert into oauth_user(oauthuser_user_id, email, name, oap, picture, provider_user_id, user_id) values (1,'parkdongmin123@gmail.com','박동민','GOOGLE','https://lh3.googleusercontent.com/a/AAcHTtdkU4M2AkI9b9XtfuQpunjoWHTG2XbGfqdwZfZ4fHnYYRk=s96-c','firebase',1);
+
 -- Board
 insert into board(board_id, writer_id, product_name, product_img, expiration_date, price, description, like_count) values (1 , 1 ,' 왕밤빵 ' ,'https://lh3.googleusercontent.com/a/AAcHTtdkU4M2AkI9b9XtfuQpunjoWHTG2XbGfqdwZfZ4fHnYYRk=s96-c','2023-07-25',3500 , ' 왕밤빵왕밤빵왕밤빵왕밤빵왕밤빵왕밤빵왕밤빵왕밤빵왕밤빵왕밤빵왕밤빵왕밤빵왕밤빵왕밤빵왕밤빵왕밤빵왕밤빵',0);
 insert into board(board_id, writer_id, product_name, product_img, expiration_date, price, description, like_count) values (2 , 1 ,'물냉면' ,'https://lh3.googleusercontent.com/a/AAcHTtdkU4M2AkI9b9XtfuQpunjoWHTG2XbGfqdwZfZ4fHnYYRk=s96-c','2023-07-25',4000 , ' 물물냉면',0);

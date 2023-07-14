@@ -38,6 +38,16 @@ spring:
     password:
     driver-class-name: org.mariadb.jdbc.Driver
 
+  # Google OAuth2 client registration properties for Spring Security
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 457162263965-ol3mdpleklg7sdrlonvg7jmh34k0fpt8.apps.googleusercontent.com
+            client-secret: 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
+            scope: profile,email
+
   # File Upload Preferences
   servlet:
     multipart:

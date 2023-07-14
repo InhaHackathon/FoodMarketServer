@@ -1,21 +1,26 @@
 package com.inhahackathon.foodmarket.auth.util;
 
-import com.inhahackathon.foodmarket.auth.exception.UnAuthorizeException;
+import com.inhahackathon.foodmarket.type.dto.UserPrincipal;
+import com.inhahackathon.foodmarket.type.entity.User;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 
+@Slf4j
 public class AuthUtil {
 
     public static User getAuthenticationInfo() {
-        return (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !(authentication.getPrincipal() instanceof UserPrincipal)) {
+            return null;
+        }
+        return ((UserPrincipal) authentication.getPrincipal()).toUser();
     }
 
-    public static long getAuthenticationInfoUserId() throws UnAuthorizeException {
-        try {
-            return Long.parseLong(getAuthenticationInfo().getUsername());
-        } catch (NumberFormatException | NullPointerException e) {
-            throw new UnAuthorizeException();
-        }
+
+    public static Long getAuthenticationInfoUserId() {
+        return getAuthenticationInfo().getUserId();
     }
 
 }
