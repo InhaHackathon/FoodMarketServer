@@ -1,6 +1,7 @@
 package com.inhahackathon.foodmarket.controller;
 
 import com.inhahackathon.foodmarket.auth.jwt.AuthToken;
+import com.inhahackathon.foodmarket.auth.util.AuthUtil;
 import com.inhahackathon.foodmarket.exception.NotAllowValueException;
 import com.inhahackathon.foodmarket.exception.PermissionDeniedException;
 import com.inhahackathon.foodmarket.service.UserService;
@@ -45,8 +46,8 @@ public class UserController {
     public ResponseModel userUpdate(
             @RequestBody UserDto userDto
     ) throws NotAllowValueException {
-//        Long userId = AuthUtil.getAuthenticationInfoUserId();
-        Long userId = 1L; // 임시
+        Long userId = AuthUtil.getAuthenticationInfoUserId();
+//        Long userId = 1L; // 임시
         userDto.setUserId(userId);
         userService.updateUser(userDto);
         ResponseModel responseModel = ResponseModel.builder().build();
@@ -71,9 +72,9 @@ public class UserController {
     public ResponseModel userDeleteAsUser(
             @PathVariable("userId") Long userId
     ) throws PermissionDeniedException {
-//        if (!userId.equals(AuthUtil.getAuthenticationInfoUserId())) {
-//            throw new PermissionDeniedException();
-//        }
+        if (!userId.equals(AuthUtil.getAuthenticationInfoUserId())) {
+            throw new PermissionDeniedException();
+        }
         userService.deleteUser(userId);
         ResponseModel responseModel = ResponseModel.builder().build();
         return responseModel;
