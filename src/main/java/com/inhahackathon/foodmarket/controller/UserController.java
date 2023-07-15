@@ -52,6 +52,19 @@ public class UserController {
         return responseModel;
     }
 
+    @Operation(summary = "유저 위치 정보 업데이트", description = "유저 위치 정보 업데이트<br>" +
+        "현재 경위도 입력(ex: 37.45085008, 126.6543226)")
+    @GetMapping("/update/location")
+    public ResponseModel userUpdateLocation(
+            @RequestParam double latitude,
+            @RequestParam double longitude
+    ) {
+        User user = AuthUtil.getAuthenticationInfo();
+        userService.updateUserLocation(user, latitude, longitude);
+        ResponseModel responseModel = ResponseModel.builder().build();
+        return responseModel;
+    }
+
     @Operation(summary = "유저 정보", description = "프로필 정보 조회")
     @GetMapping("/{userId}")
     public ResponseModel getUser(

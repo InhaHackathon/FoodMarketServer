@@ -20,6 +20,7 @@ import com.inhahackathon.foodmarket.type.entity.User;
 import com.inhahackathon.foodmarket.type.entity.UserInfoSet;
 import com.inhahackathon.foodmarket.type.etc.OAuthProvider;
 import com.inhahackathon.foodmarket.type.etc.Role;
+import com.inhahackathon.foodmarket.util.MapUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,7 @@ public class UserService {
     private final BoardService boardService;
     private final FirebaseApp firebaseApp;
     private final AuthTokenProvider authTokenProvider;
+    private final MapUtil mapUtil;
     private static final long TOKEN_DURATION = 1000L * 60L * 60L * 24L;
 
     @Transactional
@@ -122,4 +124,13 @@ public class UserService {
         return authToken;
     }
 
+    public void updateUserLocation(User user, double latitude, double longitude) {
+        String address = mapUtil.getAddress(latitude, longitude);
+        String split[] = address.split(" ");
+        for (String s : split) {
+            if (s.contains("동"))
+                user.setLocation(s);
+        }
+        userRepository.save(user);
+    }
 }
