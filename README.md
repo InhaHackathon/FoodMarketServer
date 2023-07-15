@@ -1,13 +1,13 @@
 <div align = "center">
 
-![header](https://capsule-render.vercel.app/api?type=waving&color=gradient&animation=fadeIn&height=230&text=Man%20of%20Steel&desc=INHA%20SW%20NET-Zero%20공동해커톤&fontSize=60&fontAlign=50&fontAlignY=33&descSize=20&descAlign=50&descAlignY=55)
+![header](https://capsule-render.vercel.app/api?type=waving&color=gradient&animation=fadeIn&height=230&text=C-Lab&desc=INHA%20SW%20NET-ZERO%20공동%20해커톤&fontSize=60&fontAlign=50&fontAlignY=33&descSize=20&descAlign=50&descAlignY=55)
 
 ## C-Lab - BE
 ### 👨‍👩‍👧‍👦&nbsp; Members
 
 |      | 이름  | 학번  |                      github                       |
 |:----:|:---:|:---:|:-------------------------------------------------:|
-|  팀장  | 박동민 | 19  |   [@chattymin]((https://github.com/chattymin))    |
+|  팀장  | 박동민 | 19  |    [@chattymin](https://github.com/chattymin)     |
 |  팀원  | 이석현 | 18  |      [Aram-su](https://github.com/Aram-su)        |
 |  팀원  | 한관희 | 19  |      [@limehee](https://github.com/limehee)       |
 |  팀원  | 김정은 | 22  |     [@Jeong-Ag](https://github.com/Jeong-Ag)      |
