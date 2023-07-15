@@ -145,4 +145,27 @@ public class BoardService {
         return boardResponseDtoList;
     }
 
+    public List<BoardResponseDto> searchBoard(User user, String keyword) {
+        List<Board> boardList = boardRepository.findAll();
+        List<BoardResponseDto> boardResponseDtoList = new ArrayList<>();
+        for (Board b : boardList) {
+            String productName = b.getProductName().replace(" ","");
+            String description = b.getDescription().replace(" ","");
+            if (!description.contains(keyword) && !productName.contains(keyword))
+                continue;
+            Boolean isLike = likesRepository.findById(new LikesPK(user, b)).isPresent();
+            BoardResponseDto boardResponseDto = BoardResponseDto.builder()
+                    .boardId(b.getBoardId())
+                    .productName(b.getProductName())
+                    .productImg(b.getProductImg())
+                    .expirationDate(b.getExpirationDate())
+                    .price(b.getPrice())
+                    .description(b.getDescription())
+                    .likeCount(b.getLikeCount())
+                    .isLike(isLike)
+                    .build();
+            boardResponseDtoList.add(boardResponseDto);
+        }
+        return boardResponseDtoList;
+    }
 }

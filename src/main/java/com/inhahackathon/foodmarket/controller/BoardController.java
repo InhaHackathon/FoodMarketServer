@@ -113,4 +113,16 @@ public class BoardController {
         return responseModel;
     }
 
+    @Operation(summary = "게시글 검색", description = "게시글 검색")
+    @GetMapping("/search")
+    public ResponseModel searchBoard(
+            @RequestParam String keyword
+    ) {
+        User user = AuthUtil.getAuthenticationInfo();
+        List<BoardResponseDto> board = boardService.searchBoard(user, keyword);
+        ResponseModel responseModel = ResponseModel.builder().build();
+        responseModel.addData("board", board);
+        return responseModel;
+    }
+
 }
