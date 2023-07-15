@@ -7,10 +7,8 @@
 
 |      | 이름  | 학번  |                      github                       |
 |:----:|:---:|:---:|:-------------------------------------------------:|
-|  팀장  | 박동민 | 19  |    [@chattymin](https://github.com/chattymin)     |
-|  팀원  | 이석현 | 18  |      [Aram-su](https://github.com/Aram-su)        |
+|  팀원  | 이석현 | 18  |      [@Aram-su](https://github.com/Aram-su)        |
 |  팀원  | 한관희 | 19  |      [@limehee](https://github.com/limehee)       |
-|  팀원  | 김정은 | 22  |     [@Jeong-Ag](https://github.com/Jeong-Ag)      |
 
 ### 🛠︎&nbsp; BE Tech
 
