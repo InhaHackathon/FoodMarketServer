@@ -1,24 +1,50 @@
-<div align = "center">
+# Foodmarket Server
+**2023 INHA SW NET-Zero 공동해커톤 - 장려상**
 
-![header](https://capsule-render.vercel.app/api?type=waving&color=gradient&animation=fadeIn&height=230&text=C-Lab&desc=INHA%20SW%20NET-ZERO%20공동%20해커톤&fontSize=60&fontAlign=50&fontAlignY=33&descSize=20&descAlign=50&descAlignY=55)
+<img src="https://github.com/InhaHackathon/foodmarket-server/assets/85067003/7008e7bb-0643-4041-ace8-000e3bd268a8" width="30%" alt="장려상">
 
-## C-Lab - BE
-### 👨‍👩‍👧‍👦&nbsp; Members
+'먹어요'는 유통기한 임박 식품을 개인 간 거래하거나 기부할 수 있는 어플리케이션입니다. 환경 보호에 기여하고, 음식물 쓰레기 감소를 목적으로 합니다.
 
-|      | 이름  | 학번  |                      github                       |
-|:----:|:---:|:---:|:-------------------------------------------------:|
-|  팀원  | 이석현 | 18  |      [@Aram-su](https://github.com/Aram-su)        |
-|  팀원  | 한관희 | 19  |      [@limehee](https://github.com/limehee)       |
+## 개발 배경
 
-### 🛠︎&nbsp; BE Tech
+식품 낭비 문제와 온실가스 감축 필요성에서 출발했습니다. 가정에서 발생하는 음식물 쓰레기를 줄여 환경 오염을 막고, 저소득층에게 식량을 제공하는 것에 도움을 주고자 합니다.
 
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
-![SpringBoot](https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
-![Gradle](https://img.shields.io/badge/gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white)<br>
-![MariaDB](https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=mariadb&logoColor=white)
-![AmazonAWS](https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white)
-&nbsp;
+## 주요 기능
 
-![footer](https://capsule-render.vercel.app/api?type=waving&&color=gradient&section=footer)
+- **개인 거래**: 사용자들이 유통기한이 임박한 식품을 서로 거래할 수 있는 플랫폼을 제공합니다.
+- **푸드뱅크 기부**: 기부를 원하는 사용자가 사회 단체에 식품을 기부할 수 있습니다.
+- **음식물 쓰레기 감소**: 음식물 쓰레기 감축을 통한 환경 보호에 기여합니다.
 
-</div>
+## 기대 효과
+
+- **환경 보호**: 유통기한 임박 식품의 효율적인 사용을 통해 음식물 쓰레기를 줄이고, 온실가스 배출을 감소시킵니다.
+- **식량 낭비 방지**: 남는 음식을 기부하거나 저렴한 가격에 거래함으로써 식량 낭비를 줄이고, 지속 가능한 소비를 장려합니다.
+- **사회적 가치 실현**: 저소득층에게 식품을 기부함으로써 사회적 배려와 나눔의 가치를 실천합니다.
+- **식품 안전성 강화**: 안전한 거래 플랫폼을 제공함으로써 유통기한이 지난 식품의 위험한 소비를 방지합니다.
+
+## 기술 스택
+
+- **Spring Boot**: 웹 및 애플리케이션 개발을 위한 프레임워크.
+- **Spring Security**: 인증 및 권한 부여를 위한 보안 프레임워크.
+- **Spring Data JPA**: 데이터 접근 계층을 위한 JPA.
+- **Spring OAuth2**: OAuth2 인증을 위한 프레임워크.
+- **Swagger**: API 문서 자동화.
+
+## 프로젝트 구조
+
+- `auth` : 인증 관련 기능을 수행합니다.
+- `config` : 프로젝트의 설정 관련 클래스를 모아둡니다.
+- `controller` : REST API를 통해 외부 요청을 처리합니다.
+- `exception` : 도메인별 예외 상황을 처리합니다.
+- `handler` : 예외 및 특정 상황에 대한 핸들러를 정의합니다.
+- `repository` : 데이터베이스의 CRUD 작업을 담당합니다.
+- `service` : 핵심 비즈니스 로직을 수행합니다.
+- `type`
+- - `dto` : 계층 간 데이터 교환을 위한 객체를 정의합니다.
+- - `entity` : 도메인 객체를 정의합니다.
+- - `etc` : 기타 타입을 정의합니다.
+- `util` : 일반적인 유틸리티 기능을 제공합니다.
+
+## 데이터베이스 설계도
+
+<img src="https://github.com/InhaHackathon/foodmarket-server/assets/85067003/b6542008-085e-4120-bc48-a1c9b1e134c8" width="70%" alt="DB 스키마">
